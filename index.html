@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Management System</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="logo">
+      <img src="hospital-logo.png" alt="Hospital Logo" class="logo-img">
+    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#doctor-portal">Doctor Portal</a></li>
+        <li><a href="#blood-donation">Blood Donation</a></li>
+        <li><a href="#medicine-availability">Medicine Availability</a></li>
+        <li><button id="language-toggle" onclick="toggleLanguage()">EN / हिंदी</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1>Welcome to the Best Hospital Management System</h1>
+      <p>Our advanced hospital management system helps you manage appointments, connect with doctors, buy medicines, and much more—all from the comfort of your home.</p>
+      <button class="btn hero-btn" onclick="openAIChat()">Talk to AI Assistant</button>
+    </div>
+    <img src="hospital-banner.jpg" alt="Hospital Image" class="hero-image">
+  </section>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard" class="dashboard">
+    <h2>Patient Dashboard</h2>
+    <div class="dashboard-cards">
+      <div class="card">
+        <img src="bed-icon.png" alt="Bed Availability" class="card-icon">
+        <h3>Check Bed Availability</h3>
+        <p>Instantly check available beds in your preferred department or ward.</p>
+        <button class="btn" onclick="checkBedAvailability()">Check Now</button>
+      </div>
+      <div class="card">
+        <img src="medicine-icon.png" alt="Buy Medicines" class="card-icon">
+        <h3>Buy Medicines</h3>
+        <p>Browse and buy prescribed medicines from our pharmacy online.</p>
+        <button class="btn" onclick="buyMedicines()">Buy Now</button>
+      </div>
+      <div class="card">
+        <img src="doctor-icon.png" alt="Connect with Doctors" class="card-icon">
+        <h3>Connect with Doctors</h3>
+        <p>Get online consultation from licensed doctors instantly.</p>
+        <button class="btn" onclick="connectDoctor()">Chat with Doctor</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctor Portal Section -->
+  <section id="doctor-portal" class="doctor-portal">
+    <h2>Doctor Portal</h2>
+    <p>Our doctors are available for video, audio, and chat consultations. You can view doctor availability and schedule an appointment directly.</p>
+    <button class="btn" onclick="connectDoctor()">Consult a Doctor</button>
+  </section>
+
+  <!-- Blood Donation Section -->
+  <section id="blood-donation" class="blood-donation">
+    <h2>Blood Donation</h2>
+    <p>Help save lives by donating blood. Check available blood types and register for donation.</p>
+    <button class="btn" onclick="donateBlood()">Donate Blood</button>
+  </section>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>&copy; 2025 Hospital Management System | All Rights Reserved</p>
+    <div class="social-media">
+      <a href="#" class="social-icon"><img src="facebook-icon.png" alt="Facebook"></a>
+      <a href="#" class="social-icon"><img src="twitter-icon.png" alt="Twitter"></a>
+      <a href="#" class="social-icon"><img src="instagram-icon.png" alt="Instagram"></a>
+    </div>
+  </footer>
+
+  <!-- Voice Assistant (Optional) -->
+  <div id="voice-assistant" class="voice-assistant">
+    <button class="btn" onclick="startVoiceAssistant()">Activate Voice Assistant</button>
+  </div>
+</body>
+</html>
