@@ -1,91 +1,159 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hospital Management System</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <title>Healthcare Management System</title>
+    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- ADDED: Google AI SDK Import Map -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <!-- End Added Section -->
+
 </head>
 <body>
-  <!-- Header Section -->
-  <header class="header">
-    <div class="logo">
-      <img src="hospital-logo.png" alt="Hospital Logo" class="logo-img">
-    </div>
-    <nav class="nav">
-      <ul>
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#doctor-portal">Doctor Portal</a></li>
-        <li><a href="#blood-donation">Blood Donation</a></li>
-        <li><a href="#medicine-availability">Medicine Availability</a></li>
-        <li><button id="language-toggle" onclick="toggleLanguage()">EN / हिंदी</button></li>
-      </ul>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Healthcare Management</div>
+        <div class="nav-links">
+            <button id="homeBtn" class="active">Home</button>
+            <button id="availabilityBtn">Availability</button>
+            <button id="aiAssistanceBtn">AI Assistance</button>
+            <button id="settingsBtn">Settings</button>
+            <button id="helpBtn">Help & Support</button> 
+            <button id="contactBtn">Contact Us</button>
+            <button id="loginBtn">Login</button>
+        </div>
     </nav>
-  </header>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero">
-    <div class="hero-content">
-      <h1>Welcome to the Best Hospital Management System</h1>
-      <p>Our advanced hospital management system helps you manage appointments, connect with doctors, buy medicines, and much more—all from the comfort of your home.</p>
-      <button class="btn hero-btn" onclick="openAIChat()">Talk to AI Assistant</button>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="text" placeholder="Username" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <p>Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
+            </form>
+        </div>
     </div>
-    <img src="hospital-banner.jpg" alt="Hospital Image" class="hero-image">
-  </section>
 
-  <!-- Dashboard Section -->
-  <section id="dashboard" class="dashboard">
-    <h2>Patient Dashboard</h2>
-    <div class="dashboard-cards">
-      <div class="card">
-        <img src="bed-icon.png" alt="Bed Availability" class="card-icon">
-        <h3>Check Bed Availability</h3>
-        <p>Instantly check available beds in your preferred department or ward.</p>
-        <button class="btn" onclick="checkBedAvailability()">Check Now</button>
-      </div>
-      <div class="card">
-        <img src="medicine-icon.png" alt="Buy Medicines" class="card-icon">
-        <h3>Buy Medicines</h3>
-        <p>Browse and buy prescribed medicines from our pharmacy online.</p>
-        <button class="btn" onclick="buyMedicines()">Buy Now</button>
-      </div>
-      <div class="card">
-        <img src="doctor-icon.png" alt="Connect with Doctors" class="card-icon">
-        <h3>Connect with Doctors</h3>
-        <p>Get online consultation from licensed doctors instantly.</p>
-        <button class="btn" onclick="connectDoctor()">Chat with Doctor</button>
-      </div>
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <input type="text" placeholder="Full Name" required>
+                <input type="date" placeholder="Date of Birth" required>
+                <input type="text" placeholder="Parent/Guardian Name" required>
+                <input type="tel" placeholder="Mobile Number" required>
+                <textarea placeholder="Address" required></textarea>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <input type="password" placeholder="Confirm Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
     </div>
-  </section>
 
-  <!-- Doctor Portal Section -->
-  <section id="doctor-portal" class="doctor-portal">
-    <h2>Doctor Portal</h2>
-    <p>Our doctors are available for video, audio, and chat consultations. You can view doctor availability and schedule an appointment directly.</p>
-    <button class="btn" onclick="connectDoctor()">Consult a Doctor</button>
-  </section>
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Home Page -->
+        <div id="homePage" class="page active">
+            <h1>Welcome to Healthcare Management</h1>
+            <div class="hospitals-container">
+                <h2>Nearby Hospitals</h2>
+                <div class="hospitals-grid">
+                    <!-- Hospital cards will be added dynamically -->
+                </div>
+            </div>
+        </div>
 
-  <!-- Blood Donation Section -->
-  <section id="blood-donation" class="blood-donation">
-    <h2>Blood Donation</h2>
-    <p>Help save lives by donating blood. Check available blood types and register for donation.</p>
-    <button class="btn" onclick="donateBlood()">Donate Blood</button>
-  </section>
+        <!-- Availability Page -->
+        <div id="availabilityPage" class="page">
+            <h1>Check Availability</h1>
+            <div class="availability-options">
+                <button id="medicineBtn">Medicine</button>
+                <button id="bedBtn">Bed</button>
+                <button id="injectionBtn">Injections</button>
+                <button id="doctorBtn">Doctors</button>
+            </div>
+            <div id="availabilityResults" class="results-container">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
 
-  <!-- Footer Section -->
-  <footer class="footer">
-    <p>&copy; 2025 Hospital Management System | All Rights Reserved</p>
-    <div class="social-media">
-      <a href="#" class="social-icon"><img src="facebook-icon.png" alt="Facebook"></a>
-      <a href="#" class="social-icon"><img src="twitter-icon.png" alt="Twitter"></a>
-      <a href="#" class="social-icon"><img src="instagram-icon.png" alt="Instagram"></a>
+        <!-- AI Assistance Page -->
+   
+        <div id="aiAssistancePage" class="page">
+            <h1>AI Health Assistant</h1>
+            <div class="chat-container">
+                <div id="chatMessages" class="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="userMessage" placeholder="Ask me anything about health...">
+                    <button id="sendMessageBtn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div id="settingsPage" class="page">
+            <h1>Settings</h1>
+            <div class="settings-options">
+                <button id="languageBtn">Language</button>
+                <button id="profileBtn">Profile</button>
+                <button id="notificationsBtn">Notifications</button>
+                <button id="privacyBtn">Privacy</button>
+            </div>
+            <div id="settingsContent" class="settings-content">
+                <!-- Settings content will be displayed here -->
+            </div>
+        </div>
+
+        <!-- Help & Support Page -->
+
+        <div id="helpPage" class="page">
+            <h1>Help & Support</h1>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3>How to book an appointment?</h3>
+                    <p>Go to the availability section and select doctors to find available specialists.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How to check medicine availability?</h3>
+                    <p>Navigate to availability and select medicine to search for specific drugs.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Us Page -->
+
+        <div id="contactPage" class="page">
+            <h1>Contact Us</h1>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> +91 234 567 890</p>
+                    <p><i class="fas fa-envelope"></i> support@healthcare.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Salt lake</p>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
     </div>
-  </footer>
 
-  <!-- Voice Assistant (Optional) -->
-  <div id="voice-assistant" class="voice-assistant">
-    <button class="btn" onclick="startVoiceAssistant()">Activate Voice Assistant</button>
-  </div>
+
+    <script type="module" src="test.js"></script>
+ 
+
 </body>
 </html>
